@@ -1,4 +1,6 @@
-# Day55
+# 66-days challenge
+---
+## Day55
 ---
 
 ### 1.Import tkinter
@@ -58,4 +60,46 @@ button_sub.grid(row=4, column=3)
 - Generate Event loops
 ```
 root.mainloop()
+```
+
+---
+## Day54
+---
+
+### 1.Initialize variables
+```
+num, res = set(), set()
+```
+
+### 2.Discriminate decimals 2 to 1M
+- Use sieve of Eratosthenes
+```
+for n in range(2,1000001):
+    c = True
+    for i in range(2,int(n**0.5)+1):
+        if n%i == 0:
+            c = False
+            continue
+    if c == True:
+        num.add(n)
+a = num.copy()
+```
+
+### 3.Discriminate circular prime
+- Rotate each digit to obtain len(n) natural numbers and place them in a new set. Then, determine if this set is a subset of the set of all prime numbers
+```
+while a:
+    tnum = set()
+    t = str(a.pop())
+    for _ in range(len(t)):
+        t = t[-1:]+t[:-1]
+        tnum.add(int(t))
+    if len(tnum&num)==len(tnum):
+        res.update(tnum)
+    a -= tnum
+```
+
+### 4.Print result
+```
+print(len(res)) #55
 ```
